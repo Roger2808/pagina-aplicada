@@ -5,80 +5,99 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Protección del desarrollador ante el vacío de ciberseguridad en Guatemala</title>
 <style>
-:root{--celeste:#4997D0;--celeste-claro:#EAF4FB;--verde:#1E7B4F;--rojo:#C8102E;--maiz:#E8B923;--tinta:#1B2733;--gris:#5B6B7A;--linea:#DCE5EC;--bg:#fff}
+:root{--celeste:#4997D0;--celeste-osc:#256A9E;--celeste-claro:#EAF4FB;--verde:#1E7B4F;--rojo:#C8102E;--maiz:#E8B923;--tinta:#10202E;--gris:#5B6B7A;--linea:#E3EBF1;--sombra:0 1px 2px rgba(16,32,46,.05),0 8px 24px rgba(16,32,46,.06)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--tinta);background:var(--bg);line-height:1.65}
-.wrap{max-width:900px;margin:0 auto;padding:0 20px}
-.franja{height:6px;background:linear-gradient(90deg,var(--celeste) 0 40%,var(--maiz) 40% 55%,var(--verde) 55% 80%,var(--rojo) 80%)}
-nav{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--linea);z-index:5}
-nav .wrap{display:flex;gap:18px;overflow-x:auto;padding:12px 20px;font-size:.9rem;white-space:nowrap}
-nav a{color:var(--gris);text-decoration:none}nav a:hover{color:var(--celeste)}
-header.hero{padding:70px 0 50px}
-.etq{color:var(--verde);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
-h1{font-size:clamp(1.8rem,4.5vw,2.8rem);line-height:1.2;margin:.4em 0}
-.pregunta{border-left:4px solid var(--celeste);background:var(--celeste-claro);padding:16px 20px;border-radius:0 8px 8px 0;margin-top:24px}
-.pregunta b{color:var(--celeste)}
-section{padding:56px 0;border-top:1px solid var(--linea)}
-h2{font-size:1.6rem;margin:0 0 .3em}
-h2 span{color:var(--celeste);font-weight:300;margin-right:8px}
-h3{margin:1.2em 0 .3em;font-size:1.05rem}
+body{margin:0;font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--tinta);background:#F6FAFD;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:10;width:min(940px,calc(100% - 24px));background:rgba(255,255,255,.82);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.7);border-radius:99px;box-shadow:var(--sombra)}
+nav .wrap{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:8px 14px;white-space:nowrap;font-size:.86rem}
+nav a{color:var(--gris);text-decoration:none;padding:6px 12px;border-radius:99px;transition:.2s}
+nav a:hover{background:var(--celeste-claro);color:var(--celeste-osc)}
+.marca{display:flex;gap:3px;margin-right:8px;flex:none}.marca i{width:7px;height:20px;border-radius:2px;background:var(--celeste)}.marca i:nth-child(2){background:#fff;border:1px solid var(--celeste)}
+header.hero{position:relative;color:#fff;padding:140px 0 100px;border-radius:0 0 56px 56px;overflow:hidden;background:radial-gradient(circle at 85% 10%,rgba(232,185,35,.35),transparent 40%),linear-gradient(135deg,#1E5F90 0%,#4997D0 60%,#7FBBE6 100%)}
+header.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 90px,transparent 90px 180px)}
+header.hero .wrap{position:relative}
+.etq{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:5px 14px;border-radius:99px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+h1{font-size:clamp(2.1rem,5.5vw,3.6rem);line-height:1.1;margin:.5em 0 .3em;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--maiz)}
+.sub{font-size:1.1rem;max-width:640px;opacity:.95}
+.pregunta{background:rgba(255,255,255,.96);color:var(--tinta);border-radius:20px;padding:20px 24px;margin-top:30px;box-shadow:0 20px 50px rgba(0,0,0,.18);border-left:6px solid var(--verde)}
+.pregunta b{color:var(--verde)}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+.stats div{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:16px;padding:12px 18px;min-width:140px}
+.stats strong{display:block;font-size:1.7rem;line-height:1.1}.stats span{font-size:.8rem;opacity:.9}
+section{padding:72px 0}
+section:nth-of-type(even){background:#fff}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem);margin:0 0 .4em;letter-spacing:-.01em}
+h2 span{display:inline-block;background:var(--celeste-claro);color:var(--celeste-osc);border-radius:10px;padding:2px 11px;font-size:.85rem;font-weight:700;margin-right:10px;vertical-align:middle}
+h3{margin:1.4em 0 .4em;font-size:1.1rem}
 p{margin:.6em 0}
-.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:18px}
-.card{border:1px solid var(--linea);border-radius:10px;padding:18px;background:#fff}
-.card h4{margin:0 0 6px;font-size:1rem}
-.card p{font-size:.93rem;color:#34434F;margin:.3em 0}
-.tag{display:inline-block;font-size:.72rem;padding:2px 9px;border-radius:99px;background:var(--celeste-claro);color:#2A6A98;margin-bottom:8px;font-weight:600}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:22px}
+.card{background:#fff;border:1px solid var(--linea);border-radius:18px;padding:22px;box-shadow:var(--sombra);transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(16,32,46,.12)}
+.card h4{margin:0 0 6px;font-size:1.02rem}
+.card p{font-size:.93rem;color:#34434F;margin:.35em 0}
+#casos-grid .card{border-top:4px solid var(--celeste)}
+#casos-grid .card[data-o=gt]{border-top-color:var(--verde)}
+.tag{display:inline-block;font-size:.72rem;padding:3px 11px;border-radius:99px;background:var(--celeste-claro);color:var(--celeste-osc);margin-bottom:10px;font-weight:700}
 .tag.gt{background:#E4F3EA;color:var(--verde)}
-.tag.rojo{background:#FBE7EA;color:var(--rojo)}
-table{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:14px}
-th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linea);vertical-align:top}
-th{color:var(--gris);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
-.scroll{overflow-x:auto}
-.nota{font-size:.85rem;color:var(--gris);border-left:3px solid var(--maiz);padding:6px 12px;margin-top:16px;background:#FFFBEC}
-.filtros{display:flex;gap:8px;margin:18px 0 0;flex-wrap:wrap}
-.filtros button{border:1px solid var(--linea);background:#fff;padding:7px 16px;border-radius:99px;cursor:pointer;font:inherit;font-size:.88rem;color:var(--gris)}
-.filtros button.on{background:var(--celeste);border-color:var(--celeste);color:#fff}
-ul.lista{padding-left:18px}ul.lista li{margin:.35em 0}
-.dos{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-/* encuesta */
-form fieldset{border:1px solid var(--linea);border-radius:10px;margin:14px 0;padding:14px 18px}
-form legend{padding:0 6px;font-weight:600;font-size:.95rem}
-.escala{display:flex;gap:8px;justify-content:space-between;margin-top:8px}
-.escala label{flex:1;text-align:center;cursor:pointer;font-size:.8rem;color:var(--gris)}
+.scroll{overflow-x:auto;background:#fff;border:1px solid var(--linea);border-radius:18px;box-shadow:var(--sombra);margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--linea);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{background:var(--celeste-claro);color:var(--celeste-osc);font-size:.78rem;text-transform:uppercase;letter-spacing:.07em}
+.nota{font-size:.86rem;color:#6B5A12;border-left:4px solid var(--maiz);padding:10px 16px;margin-top:18px;background:#FFF9E3;border-radius:0 12px 12px 0}
+.filtros{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.filtros button{border:1px solid var(--linea);background:#fff;padding:8px 20px;border-radius:99px;cursor:pointer;font:inherit;font-size:.88rem;color:var(--gris);transition:.2s}
+.filtros button.on{background:linear-gradient(135deg,var(--celeste),var(--celeste-osc));border-color:transparent;color:#fff;box-shadow:0 6px 16px rgba(73,151,208,.4)}
+ul.lista{padding-left:20px}ul.lista li{margin:.45em 0}ul.lista li::marker{color:var(--celeste)}
+.dos{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));margin-top:20px}
+.dos>div{background:#fff;border:1px solid var(--linea);border-radius:20px;padding:10px 26px 18px;box-shadow:var(--sombra);border-top:5px solid var(--celeste)}
+.dos>div:nth-child(2){border-top-color:var(--verde)}.dos>div:nth-child(2) ul.lista li::marker{color:var(--verde)}
+.dos h3{margin-top:.9em}
+form fieldset{border:1px solid var(--linea);border-radius:18px;margin:16px 0;padding:18px 22px;background:#fff;box-shadow:var(--sombra)}
+form legend{padding:0 8px;font-weight:600;font-size:.96rem}
+.escala{display:flex;gap:8px;margin-top:8px}
+.escala label{flex:1;text-align:center;cursor:pointer}
 .escala input{position:absolute;opacity:0}
-.escala span{display:block;border:1px solid var(--linea);border-radius:8px;padding:9px 0;font-size:1rem;color:var(--tinta);transition:.15s}
-.escala label:hover span{border-color:var(--celeste)}
-.escala input:checked+span{background:var(--celeste);color:#fff;border-color:var(--celeste)}
+.escala span{display:block;border:1.5px solid var(--linea);border-radius:12px;padding:10px 0;font-weight:600;color:var(--gris);transition:.15s;background:#fff}
+.escala label:hover span{border-color:var(--celeste);color:var(--celeste-osc)}
+.escala input:checked+span{background:linear-gradient(135deg,var(--celeste),var(--celeste-osc));color:#fff;border-color:transparent;transform:scale(1.05);box-shadow:0 6px 14px rgba(73,151,208,.4)}
 .escala input:focus-visible+span{outline:2px solid var(--verde);outline-offset:2px}
-.extremos{display:flex;justify-content:space-between;font-size:.72rem;color:var(--gris);margin-top:4px}
-select{font:inherit;padding:9px;border:1px solid var(--linea);border-radius:8px;width:100%;margin-top:4px}
-.btn{background:var(--verde);color:#fff;border:0;padding:12px 26px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
-.btn:hover{background:#17653F}
-.btn.sec{background:#fff;color:var(--gris);border:1px solid var(--linea);font-weight:400;padding:9px 16px;font-size:.88rem}
-.err{color:var(--rojo);font-size:.9rem;min-height:1.2em}
-.fila{margin:10px 0}
-.barra{height:10px;background:var(--celeste-claro);border-radius:99px;overflow:hidden;margin-top:4px}
-.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--celeste),var(--verde))}
-#resultados{display:none;margin-top:26px}
-footer{background:var(--tinta);color:#C9D4DD;padding:36px 0;font-size:.88rem}
-footer h5{margin:0 0 10px;color:#fff;font-size:.95rem}
-footer ul{list-style:none;padding:0;margin:0;display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-footer small{display:block;margin-top:18px;color:#8FA1B0}
+.extremos{display:flex;justify-content:space-between;font-size:.72rem;color:var(--gris);margin-top:6px}
+select{font:inherit;padding:11px;border:1.5px solid var(--linea);border-radius:12px;width:100%;margin-top:4px;background:#fff}
+#prog{position:sticky;top:76px;z-index:4;height:6px;background:var(--linea);border-radius:99px;overflow:hidden;margin:18px 0}
+#prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--celeste),var(--verde));transition:width .3s}
+.btn{background:linear-gradient(135deg,var(--verde),#2BA06B);color:#fff;border:0;padding:15px 34px;border-radius:99px;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 10px 24px rgba(30,123,79,.35);transition:.2s}
+.btn:hover{transform:translateY(-2px)}.btn:disabled{opacity:.6;cursor:wait;transform:none}
+.err{color:var(--rojo);font-size:.92rem;min-height:1.3em}
+#gracias{display:none;text-align:center;background:#fff;border:1px solid var(--linea);border-radius:24px;padding:50px 24px;box-shadow:var(--sombra)}
+#gracias h3{font-size:1.6rem;margin:.2em 0}
+.check{width:64px;height:64px;border-radius:50%;background:var(--verde);color:#fff;font-size:2rem;display:grid;place-items:center;margin:0 auto 10px}
+footer{position:relative;background:linear-gradient(160deg,#10202E,#1B3347);color:#C9D4DD;padding:54px 0 36px;font-size:.9rem;margin-top:0}
+footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--celeste) 0 33%,#fff 33% 66%,var(--celeste) 66%)}
+footer h5{margin:0 0 14px;color:#fff;font-size:1rem}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+footer li{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:10px 16px;border-radius:12px}
+footer small{display:block;margin-top:24px;color:#8FA1B0}
 .oculto{display:none!important}
+.rev{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}.rev.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+@media(max-width:560px){.escala{gap:5px}header.hero{padding:120px 0 80px;border-radius:0 0 32px 32px}}
 </style>
 </head>
 <body>
-<div class="franja"></div>
-<nav><div class="wrap">
-<a href="#por-que">¿Por qué no hay ley?</a><a href="#marco">Marco e iniciativas</a><a href="#casos">Casos</a><a href="#proteccion">Protección</a><a href="#encuesta">Encuesta</a>
+<nav><div class="wrap"><span class="marca" aria-hidden="true"><i></i><i></i><i></i></span>
+<a href="#por-que">¿Por qué no hay ley?</a><a href="#marco">Marco legal</a><a href="#casos">Casos</a><a href="#proteccion">Protección</a><a href="#encuesta">Encuesta</a>
 </div></nav>
 
 <header class="hero"><div class="wrap">
-<div class="etq">Investigación · Ciberseguridad y derecho · Guatemala</div>
-<h1>Cómo protegerse como desarrollador cuando la ley no alcanza</h1>
-<p>Un recorrido por el vacío regulatorio de Guatemala, los casos que muestran sus consecuencias y las estrategias técnicas y jurídicas que puede aplicar quien crea aplicaciones web.</p>
+<span class="etq">Ciberseguridad y derecho · Guatemala</span>
+<h1>Cómo protegerse como desarrollador <em>cuando la ley no alcanza</em></h1>
+<p class="sub">Un recorrido por el vacío regulatorio de Guatemala, los casos que muestran sus consecuencias y las estrategias técnicas y jurídicas que puede aplicar quien crea aplicaciones web.</p>
 <div class="pregunta"><b>Pregunta de investigación:</b> ¿Qué estrategias técnicas y jurídicas pueden implementarse para proteger a los desarrolladores de software durante la creación de aplicaciones web ante la limitada regulación de ciberseguridad existente en Guatemala?</div>
+<div class="stats"><div><strong>0</strong><span>leyes integrales de ciberseguridad</span></div><div><strong>7</strong><span>artículos penales informáticos (274 A–G)</span></div><div><strong>9</strong><span>casos analizados</span></div></div>
 </div></header>
 
 <section id="por-que"><div class="wrap">
@@ -174,23 +193,17 @@ footer small{display:block;margin-top:18px;color:#8FA1B0}
 <section id="encuesta"><div class="wrap">
 <h2><span>05</span>Encuesta</h2>
 <p>Indica qué tan de acuerdo estás con cada afirmación: <b>1</b> = totalmente en desacuerdo, <b>5</b> = totalmente de acuerdo. Es anónima y toma menos de tres minutos.</p>
+<div id="prog"><i></i></div>
 <form id="form" novalidate>
 <fieldset><legend>Tu perfil</legend>
-<label>Rol principal<select name="rol" required><option value="">Selecciona…</option><option>Estudiante</option><option>Desarrollador/a independiente</option><option>Desarrollador/a en empresa</option><option>Profesional del derecho o seguridad</option><option>Otro</option></select></label>
-<label style="display:block;margin-top:10px">Experiencia desarrollando<select name="exp" required><option value="">Selecciona…</option><option>Menos de 1 año</option><option>1 a 3 años</option><option>3 a 5 años</option><option>Más de 5 años</option></select></label>
+<label>Rol principal<select name="rol"><option value="">Selecciona…</option><option>Estudiante</option><option>Desarrollador/a independiente</option><option>Desarrollador/a en empresa</option><option>Profesional del derecho o seguridad</option><option>Otro</option></select></label>
+<label style="display:block;margin-top:12px">Experiencia desarrollando<select name="exp"><option value="">Selecciona…</option><option>Menos de 1 año</option><option>1 a 3 años</option><option>3 a 5 años</option><option>Más de 5 años</option></select></label>
 </fieldset>
 <div id="preguntas"></div>
 <p class="err" id="err" role="alert"></p>
-<button class="btn" type="submit">Enviar respuestas</button>
-<button class="btn sec" type="button" id="ver">Ver resultados</button>
+<button class="btn" type="submit" id="enviar">Enviar respuestas</button>
 </form>
-<div id="resultados">
-<h3>Resultados <small id="n" style="color:var(--gris);font-weight:400"></small></h3>
-<div id="barras"></div>
-<p class="nota">Las respuestas se guardan en este navegador. Para recolectar datos de todo el grupo, define la URL de un formulario en la variable <code>ENDPOINT</code> del script.</p>
-<button class="btn sec" id="csv" type="button">Descargar CSV</button>
-<button class="btn sec" id="borrar" type="button">Borrar datos locales</button>
-</div>
+<div id="gracias"><div class="check">✓</div><h3>¡Gracias por participar!</h3><p>Tus respuestas fueron enviadas de forma anónima.</p></div>
 </div></section>
 
 <footer><div class="wrap">
@@ -207,16 +220,17 @@ footer small{display:block;margin-top:18px;color:#8FA1B0}
 </div></footer>
 
 <script>
-// Casos: filtros
+/* ============ CONFIGURACIÓN ============
+   Pega aquí la URL de tu Google Apps Script (termina en /exec).
+   Instrucciones en LEEME.md */
+const ENDPOINT="https://script.google.com/macros/s/AKfycbxiAoCGL2N-FgGgq-0GJX5V30c_JTPEbOTfIiKhAyCeRxOZETXW2CkJeKkHtDyl_gNv/exec";
+
 document.getElementById('filtros').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   document.querySelectorAll('#filtros button').forEach(x=>x.classList.toggle('on',x===b));
   document.querySelectorAll('#casos-grid .card').forEach(c=>c.classList.toggle('oculto',b.dataset.f!=='todos'&&c.dataset.o!==b.dataset.f));
 });
 
-// Encuesta
-const ENDPOINT=""; // Opcional: URL de Formspree, Google Apps Script, etc.
-const KEY="encuesta_ciber_gt_v1";
 const ITEMS=[
  "Conozco los delitos informáticos del Código Penal guatemalteco (arts. 274 A–G).",
  "Considero que la regulación actual de Guatemala es suficiente para proteger a quien desarrolla software.",
@@ -235,56 +249,49 @@ ITEMS.forEach((t,i)=>{
    `</div><div class="extremos"><span>Totalmente en desacuerdo</span><span>Totalmente de acuerdo</span></div>`;
   cont.appendChild(f);
 });
-const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}};
-const save=a=>{try{localStorage.setItem(KEY,JSON.stringify(a));return true}catch(e){return false}};
-let memoria=[]; // respaldo si localStorage no está disponible
-const getAll=()=>{const l=load();return l.length?l:memoria};
+const form=document.getElementById('form'),err=document.getElementById('err'),btn=document.getElementById('enviar');
+const total=ITEMS.length+2;
+function progreso(){
+  const fd=new FormData(form);let n=0;
+  if(fd.get('rol'))n++;if(fd.get('exp'))n++;
+  ITEMS.forEach((_,i)=>{if(fd.get('p'+i))n++});
+  document.querySelector('#prog i').style.width=(n/total*100)+'%';
+}
+form.addEventListener('change',progreso);
 
-document.getElementById('form').addEventListener('submit',async e=>{
+/* Cola local: si falla el envío (sin internet), se reintenta después */
+const PEND="encuesta_pendientes";
+const getP=()=>{try{return JSON.parse(localStorage.getItem(PEND))||[]}catch(e){return[]}};
+const setP=a=>{try{localStorage.setItem(PEND,JSON.stringify(a))}catch(e){}};
+async function enviar(r){
+  await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(r)});
+}
+async function reintentar(){
+  const p=getP();if(!p.length||ENDPOINT.includes('PEGA_AQUI'))return;
+  const resto=[];
+  for(const r of p){try{await enviar(r)}catch(e){resto.push(r)}}
+  setP(resto);
+}
+reintentar();
+
+form.addEventListener('submit',async e=>{
   e.preventDefault();
-  const fd=new FormData(e.target),err=document.getElementById('err');
-  const falta=[];
+  const fd=new FormData(form),falta=[];
   if(!fd.get('rol'))falta.push('rol');
   if(!fd.get('exp'))falta.push('experiencia');
-  ITEMS.forEach((_,i)=>{if(!fd.get('p'+i))falta.push(i+1)});
-  if(falta.length){err.textContent='Falta responder: '+falta.map(x=>typeof x==='number'?'pregunta '+x:x).join(', ')+'.';return}
-  err.textContent='';
+  ITEMS.forEach((_,i)=>{if(!fd.get('p'+i))falta.push('pregunta '+(i+1))});
+  if(falta.length){err.textContent='Falta responder: '+falta.join(', ')+'.';return}
+  if(ENDPOINT.includes('PEGA_AQUI')){err.textContent='La encuesta aún no está conectada (falta configurar ENDPOINT).';return}
+  err.textContent='';btn.disabled=true;btn.textContent='Enviando…';
   const r={fecha:new Date().toISOString(),rol:fd.get('rol'),exp:fd.get('exp'),resp:ITEMS.map((_,i)=>+fd.get('p'+i))};
-  const todos=load();todos.push(r);
-  if(!save(todos)){memoria.push(r)}
-  if(ENDPOINT){try{await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(r)})}catch(x){}}
-  e.target.reset();
-  mostrar();
-  err.textContent='¡Gracias! Tu respuesta fue registrada.';
-  err.style.color='var(--verde)';
-  setTimeout(()=>{err.textContent='';err.style.color=''},4000);
+  try{await enviar(r)}catch(x){setP(getP().concat(r))}
+  form.style.display='none';document.getElementById('prog').style.display='none';
+  const g=document.getElementById('gracias');g.style.display='block';g.scrollIntoView({behavior:'smooth',block:'center'});
 });
 
-function mostrar(){
-  const a=getAll(),box=document.getElementById('resultados');
-  box.style.display='block';
-  document.getElementById('n').textContent='('+a.length+(a.length===1?' respuesta)':' respuestas)');
-  const cont=document.getElementById('barras');
-  if(!a.length){cont.innerHTML='<p>Aún no hay respuestas.</p>';return}
-  cont.innerHTML=ITEMS.map((t,i)=>{
-    const m=a.reduce((s,r)=>s+r.resp[i],0)/a.length;
-    return `<div class="fila"><div style="font-size:.9rem">${i+1}. ${t} <b>${m.toFixed(2)}</b> / 5</div><div class="barra"><i style="width:${m/5*100}%"></i></div></div>`;
-  }).join('');
-  box.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-document.getElementById('ver').onclick=mostrar;
-document.getElementById('borrar').onclick=()=>{
-  if(confirm('¿Borrar todas las respuestas guardadas en este navegador?')){
-    try{localStorage.removeItem(KEY)}catch(e){}memoria=[];mostrar();
-  }
-};
-document.getElementById('csv').onclick=()=>{
-  const a=getAll();if(!a.length){alert('No hay datos para exportar.');return}
-  const h=['fecha','rol','experiencia',...ITEMS.map((_,i)=>'P'+(i+1))];
-  const rows=a.map(r=>[r.fecha,r.rol,r.exp,...r.resp].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(','));
-  const blob=new Blob(['\ufeff'+h.join(',')+'\n'+rows.join('\n')],{type:'text/csv;charset=utf-8'});
-  const l=document.createElement('a');l.href=URL.createObjectURL(blob);l.download='encuesta_ciberseguridad_gt.csv';l.click();
-};
+/* Animación de entrada */
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}}),{threshold:.08});
+document.querySelectorAll('.card,.dos>div,form fieldset,.scroll').forEach(el=>{el.classList.add('rev');io.observe(el)});
 </script>
 </body>
 </html>
