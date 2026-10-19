@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Protección del desarrollador ante el vacío de ciberseguridad en Guatemala</title>
+<title>Encuesta: Protección del desarrollador ante el vacío de ciberseguridad en Guatemala</title>
 <style>
+
 :root{--celeste:#4997D0;--celeste-osc:#256A9E;--celeste-claro:#EAF4FB;--verde:#1E7B4F;--rojo:#C8102E;--maiz:#E8B923;--tinta:#10202E;--gris:#5B6B7A;--linea:#E3EBF1;--sombra:0 1px 2px rgba(16,32,46,.05),0 8px 24px rgba(16,32,46,.06)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -85,6 +86,10 @@ footer small{display:block;margin-top:24px;color:#8FA1B0}
 .rev{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}.rev.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 @media(max-width:560px){.escala{gap:5px}header.hero{padding:120px 0 80px;border-radius:0 0 32px 32px}}
+
+body{background:#F6FAFD}
+nav, header.hero, footer, #por-que, #marco, #casos, #proteccion{display:none!important}
+section#encuesta{padding:40px 0}
 </style>
 </head>
 <body>
@@ -104,31 +109,8 @@ footer small{display:block;margin-top:24px;color:#8FA1B0}
 <div id="gracias"><div class="check">✓</div><h3>¡Gracias por participar!</h3><p>Tus respuestas fueron enviadas de forma anónima.</p></div>
 </div></section>
 
-<footer><div class="wrap">
-<h5>Integrantes del grupo</h5>
-<ul>
-<li>Roger Leonardo Monterroso Recinos – 1565723</li>
-<li>Allan Francisco Moisés Chaclán Guinea – 1502023</li>
-<li>Vyncen Yoel Lara de León – 1615823</li>
-<li>Juan Marcos Cortés Enríquez – 1530623</li>
-<li>Fernando David Contreras Moran – 1631023</li>
-<li>Diego Alejandro Afre Reyes – 1594422</li>
-</ul>
-<small>Proyecto de investigación académica · Guatemala · No constituye asesoría legal.</small>
-</div></footer>
-
 <script>
-/* ============ CONFIGURACIÓN ============
-   Pega aquí la URL de tu Google Apps Script (termina en /exec).
-   Instrucciones en LEEME.md */
 const ENDPOINT="https://script.google.com/macros/s/AKfycbxiAoCGL2N-FgGgq-0GJX5V30c_JTPEbOTfIiKhAyCeRxOZETXW2CkJeKkHtDyl_gNv/exec";
-
-document.getElementById('filtros').addEventListener('click',e=>{
-  const b=e.target.closest('button');if(!b)return;
-  document.querySelectorAll('#filtros button').forEach(x=>x.classList.toggle('on',x===b));
-  document.querySelectorAll('#casos-grid .card').forEach(c=>c.classList.toggle('oculto',b.dataset.f!=='todos'&&c.dataset.o!==b.dataset.f));
-});
-
 const ITEMS=[
  "Conozco los delitos informáticos del Código Penal guatemalteco (arts. 274 A–G).",
  "Considero que la regulación actual de Guatemala es suficiente para proteger a quien desarrolla software.",
@@ -141,55 +123,48 @@ const ITEMS=[
 ];
 const cont=document.getElementById('preguntas');
 ITEMS.forEach((t,i)=>{
-  const f=document.createElement('fieldset');
-  f.innerHTML=`<legend>${i+1}. ${t}</legend><div class="escala">`+
-   [1,2,3,4,5].map(v=>`<label><input type="radio" name="p${i}" value="${v}"><span>${v}</span></label>`).join('')+
-   `</div><div class="extremos"><span>Totalmente en desacuerdo</span><span>Totalmente de acuerdo</span></div>`;
-  cont.appendChild(f);
+ const f=document.createElement('fieldset');
+ f.innerHTML=`<legend>${i+1}. ${t}</legend><div class="escala">`+
+ [1,2,3,4,5].map(v=>`<label><input type="radio" name="p${i}" value="${v}" required><span>${v}</span></label>`).join('')+
+ `</div><div class="extremos"><span>Totalmente en desacuerdo</span><span>Totalmente de acuerdo</span></div>`;
+ cont.appendChild(f);
 });
 const form=document.getElementById('form'),err=document.getElementById('err'),btn=document.getElementById('enviar');
 const total=ITEMS.length+2;
 function progreso(){
-  const fd=new FormData(form);let n=0;
-  if(fd.get('rol'))n++;if(fd.get('exp'))n++;
-  ITEMS.forEach((_,i)=>{if(fd.get('p'+i))n++});
-  document.querySelector('#prog i').style.width=(n/total*100)+'%';
+ const fd=new FormData(form);let n=0;
+ if(fd.get('rol'))n++; if(fd.get('exp'))n++;
+ ITEMS.forEach((_,i)=>{if(fd.get('p'+i))n++});
+ document.querySelector('#prog i').style.width=(n/total*100)+'%';
 }
 form.addEventListener('change',progreso);
-
-/* Cola local: si falla el envío (sin internet), se reintenta después */
 const PEND="encuesta_pendientes";
 const getP=()=>{try{return JSON.parse(localStorage.getItem(PEND))||[]}catch(e){return[]}};
 const setP=a=>{try{localStorage.setItem(PEND,JSON.stringify(a))}catch(e){}};
 async function enviar(r){
-  await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(r)});
+ await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(r)});
 }
 async function reintentar(){
-  const p=getP();if(!p.length||ENDPOINT.includes('PEGA_AQUI'))return;
-  const resto=[];
-  for(const r of p){try{await enviar(r)}catch(e){resto.push(r)}}
-  setP(resto);
+ const p=getP();if(!p.length)return;
+ const resto=[];
+ for(const r of p){try{await enviar(r)}catch(e){resto.push(r)}}
+ setP(resto);
 }
 reintentar();
-
 form.addEventListener('submit',async e=>{
-  e.preventDefault();
-  const fd=new FormData(form),falta=[];
-  if(!fd.get('rol'))falta.push('rol');
-  if(!fd.get('exp'))falta.push('experiencia');
-  ITEMS.forEach((_,i)=>{if(!fd.get('p'+i))falta.push('pregunta '+(i+1))});
-  if(falta.length){err.textContent='Falta responder: '+falta.join(', ')+'.';return}
-  if(ENDPOINT.includes('PEGA_AQUI')){err.textContent='La encuesta aún no está conectada (falta configurar ENDPOINT).';return}
-  err.textContent='';btn.disabled=true;btn.textContent='Enviando…';
-  const r={fecha:new Date().toISOString(),rol:fd.get('rol'),exp:fd.get('exp'),resp:ITEMS.map((_,i)=>+fd.get('p'+i))};
-  try{await enviar(r)}catch(x){setP(getP().concat(r))}
-  form.style.display='none';document.getElementById('prog').style.display='none';
-  const g=document.getElementById('gracias');g.style.display='block';g.scrollIntoView({behavior:'smooth',block:'center'});
+ e.preventDefault();
+ const fd=new FormData(form),falta=[];
+ if(!fd.get('rol'))falta.push('rol');
+ if(!fd.get('exp'))falta.push('experiencia');
+ ITEMS.forEach((_,i)=>{if(!fd.get('p'+i))falta.push('pregunta '+(i+1))});
+ if(falta.length){err.textContent='Falta responder: '+falta.join(', ')+'.';return}
+ err.textContent='';btn.disabled=true;btn.textContent='Enviando…';
+ const r={fecha:new Date().toISOString(),rol:fd.get('rol'),exp:fd.get('exp'),resp:ITEMS.map((_,i)=>+fd.get('p'+i))};
+ try{await enviar(r)}catch(x){setP(getP().concat(r))}
+ form.style.display='none';document.getElementById('prog').style.display='none';
+ const g=document.getElementById('gracias');g.style.display='block';g.scrollIntoView({behavior:'smooth',block:'center'});
 });
-
-/* Animación de entrada */
-const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}}),{threshold:.08});
-document.querySelectorAll('.card,.dos>div,form fieldset,.scroll').forEach(el=>{el.classList.add('rev');io.observe(el)});
 </script>
+
 </body>
 </html>
